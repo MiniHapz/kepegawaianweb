@@ -186,6 +186,9 @@
   cursor: pointer;
   transition: var(--transition);
   background: var(--card-bg);
+    /* tambahan supaya teks panjang wrap */
+  flex-wrap: wrap;       /* teks bisa ke bawah */
+  word-break: break-word; 
 }
 
 .edit-guru-checkbox:hover {

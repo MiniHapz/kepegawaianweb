@@ -1,0 +1,549 @@
+/* DetailSekolah.css */
+.ts-detail-container {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  width: 100%;
+  height: 100%;
+  min-height: 0; /* Penting untuk flex scrolling */
+}
+
+.ts-detail-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--ts-card-bg);
+  padding: 24px 32px;
+  border-radius: var(--ts-border-radius);
+  box-shadow: var(--ts-shadow);
+  border: 1px solid var(--ts-border-color);
+  margin-bottom: 8px;
+  flex-shrink: 0; /* Mencegah header menyusut */
+}
+
+.ts-detail-title-section {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.ts-detail-title-icon {
+  font-size: 32px;
+  color: var(--ts-primary-color);
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(124, 58, 237, 0.1));
+  padding: 12px;
+  border-radius: 12px;
+}
+
+.ts-detail-title-section h1 {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--ts-text-color);
+  margin: 0 0 4px 0;
+  background: linear-gradient(135deg, var(--ts-primary-color), var(--ts-secondary-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.ts-detail-title-section p {
+  font-size: 14px;
+  color: var(--ts-text-muted);
+  margin: 0;
+}
+
+/* Detail Content - DITAMBAHKAN SCROLL */
+.ts-detail-content {
+  background: var(--ts-card-bg);
+  border-radius: var(--ts-border-radius);
+  box-shadow: var(--ts-shadow);
+  border: 1px solid var(--ts-border-color);
+  overflow: hidden;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0; /* Penting untuk flex scrolling */
+}
+
+/* Container untuk konten yang bisa di-scroll */
+.ts-detail-scrollable {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: calc(100vh - 200px); /* Sesuaikan dengan kebutuhan */
+  padding: 0; /* Hapus padding dari sini */
+}
+
+/* Scrollbar styling untuk konsistensi */
+.ts-detail-scrollable::-webkit-scrollbar {
+  width: 8px;
+}
+
+.ts-detail-scrollable::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 4px;
+  margin: 4px;
+}
+
+.ts-detail-scrollable::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+.ts-detail-scrollable::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+.ts-detail-item {
+  display: flex;
+  align-items: center;
+  padding: 28px 32px;
+  border-bottom: 1px solid var(--ts-border-color);
+  transition: var(--ts-transition);
+  min-height: 88px;
+  gap: 24px;
+  flex-shrink: 0; /* Mencegah item menyusut */
+}
+
+.ts-detail-item:hover {
+  background-color: #f8fafc;
+}
+
+.ts-detail-item:last-child {
+  border-bottom: none;
+}
+
+.ts-detail-label {
+  flex: 0 0 320px;
+  font-weight: 600;
+  color: var(--ts-text-color);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 15px;
+}
+
+.ts-detail-label .icon {
+  font-size: 20px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(124, 58, 237, 0.1));
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+
+.ts-detail-value {
+  flex: 1;
+  color: var(--ts-text-color);
+  font-size: 15px;
+  line-height: 1.6;
+  min-width: 0;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* Jenjang Options */
+.ts-jenjang-options {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.ts-jenjang-option {
+  padding: 12px 24px;
+  border: 2px solid var(--ts-border-color);
+  border-radius: var(--ts-border-radius);
+  cursor: pointer;
+  transition: var(--ts-transition);
+  font-weight: 600;
+  background-color: var(--ts-bg-color);
+  color: var(--ts-text-muted);
+  font-size: 14px;
+  flex: 1;
+  min-width: 100px;
+  text-align: center;
+}
+
+.ts-jenjang-option.active {
+  background: linear-gradient(135deg, var(--ts-primary-color), var(--ts-secondary-color));
+  color: white;
+  border-color: transparent;
+  transform: translateY(-2px);
+  box-shadow: var(--ts-shadow);
+}
+
+.ts-jenjang-option:hover:not(.active) {
+  border-color: var(--ts-primary-light);
+  color: var(--ts-primary-color);
+  transform: translateY(-1px);
+}
+
+/* Akreditasi Badge */
+.ts-akreditasi-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  background: linear-gradient(135deg, rgba(255, 169, 242, 0.525), #ffe6a079);
+  color: black;
+  border-radius: var(--ts-border-radius);
+  font-weight: 700;
+  font-size: 16px;
+  min-width: 60px;
+  box-shadow: var(--ts-shadow);
+  letter-spacing: 1px;
+}
+
+/* Alamat text specific styling */
+.ts-detail-alamat {
+  line-height: 1.7;
+  font-size: 15px;
+  color: var(--ts-text-color);
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .ts-detail-label {
+    flex: 0 0 280px;
+  }
+  
+  .ts-detail-scrollable {
+    max-height: calc(100vh - 180px);
+  }
+}
+
+@media (max-width: 1024px) {
+  .ts-detail-item {
+    padding: 24px 28px;
+    gap: 20px;
+  }
+  
+  .ts-detail-label {
+    flex: 0 0 250px;
+    font-size: 14px;
+  }
+  
+  .ts-detail-value {
+    font-size: 14px;
+  }
+  
+  .ts-detail-scrollable {
+    max-height: calc(100vh - 160px);
+  }
+}
+
+@media (max-width: 768px) {
+  .ts-detail-header {
+    padding: 20px 24px;
+    flex-direction: column;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  
+  .ts-detail-title-section {
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+  }
+  
+  .ts-detail-title-icon {
+    align-self: flex-start;
+  }
+  
+  .ts-detail-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 20px 24px;
+  }
+  
+  .ts-detail-label {
+    flex: none;
+    width: 100%;
+    font-size: 14px;
+  }
+  
+  .ts-detail-value {
+    width: 100%;
+    padding-left: 0;
+  }
+  
+  .ts-jenjang-options {
+    justify-content: flex-start;
+    width: 100%;
+  }
+  
+  .ts-detail-title-section h1 {
+    font-size: 22px;
+  }
+  
+  .ts-detail-scrollable {
+    max-height: calc(100vh - 140px);
+  }
+}
+
+@media (max-width: 640px) {
+  .ts-detail-header {
+    padding: 16px 20px;
+  }
+  
+  .ts-detail-item {
+    padding: 16px 20px;
+  }
+  
+  .ts-detail-title-section h1 {
+    font-size: 20px;
+  }
+  
+  .ts-jenjang-options {
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .ts-jenjang-option {
+    width: 100%;
+    text-align: center;
+  }
+  
+  .ts-detail-label .icon {
+    font-size: 18px;
+    width: 36px;
+    height: 36px;
+  }
+  
+  .ts-detail-scrollable {
+    max-height: calc(100vh - 120px);
+  }
+  
+  /* Scrollbar lebih kecil di mobile */
+  .ts-detail-scrollable::-webkit-scrollbar {
+    width: 6px;
+  }
+}
+
+/* Animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.ts-detail-item {
+  animation: fadeInUp 0.5s ease-out;
+}
+
+.ts-detail-item:nth-child(1) { animation-delay: 0.1s; }
+.ts-detail-item:nth-child(2) { animation-delay: 0.2s; }
+.ts-detail-item:nth-child(3) { animation-delay: 0.3s; }
+.ts-detail-item:nth-child(4) { animation-delay: 0.4s; }
+.ts-detail-item:nth-child(5) { animation-delay: 0.5s; }
+.ts-detail-item:nth-child(6) { animation-delay: 0.6s; }
+
+/* Smooth scrolling untuk pengalaman yang lebih baik */
+.ts-detail-scrollable {
+  scroll-behavior: smooth;
+}
+
+@supports (scrollbar-width: thin) {
+  .ts-detail-scrollable {
+    scrollbar-width: thin;
+    scrollbar-color: #cbd5e1 #f1f5f9;
+  }
+}
+
+/* Status Radio Group */
+.ts-status-radio-group {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.ts-radio-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  padding: 12px 16px;
+  border: 2px solid var(--ts-border-color);
+  border-radius: var(--ts-border-radius);
+  transition: var(--ts-transition);
+  background: var(--ts-bg-color);
+  min-width: 150px;
+}
+
+.ts-radio-option:hover {
+  border-color: var(--ts-primary-light);
+  transform: translateY(-1px);
+}
+
+.ts-radio-option input[type="radio"] {
+  display: none;
+}
+
+.ts-radio-checkmark {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--ts-border-color);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--ts-transition);
+}
+
+.ts-radio-option input[type="radio"]:checked + .ts-radio-checkmark {
+  border-color: var(--ts-primary-color);
+  background: var(--ts-primary-color);
+}
+
+.ts-radio-option input[type="radio"]:checked + .ts-radio-checkmark::after {
+  content: '';
+  width: 8px;
+  height: 8px;
+  background: white;
+  border-radius: 50%;
+}
+
+.ts-radio-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+  color: var(--ts-text-color);
+}
+
+.ts-status-icon {
+  font-size: 16px;
+}
+
+.ts-status-icon.aktif {
+  color: #10b981;
+}
+
+.ts-status-icon.nonaktif {
+  color: #ef4444;
+}
+
+/* Radio option active state */
+.ts-radio-option input[type="radio"]:checked ~ .ts-radio-label {
+  font-weight: 600;
+}
+
+.ts-radio-option input[type="radio"]:checked {
+  border-color: var(--ts-primary-color);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Responsive radio group */
+@media (max-width: 768px) {
+  .ts-status-radio-group {
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .ts-radio-option {
+    width: 100%;
+    justify-content: flex-start;
+  }
+}
+
+.ts-save-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  background: linear-gradient(135deg, var(--ts-primary-color), var(--ts-secondary-color));
+  color: white;
+  border: none;
+  border-radius: var(--ts-border-radius);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--ts-transition);
+  box-shadow: var(--ts-shadow);
+}
+
+.ts-save-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--ts-shadow-lg);
+  background: linear-gradient(135deg, var(--ts-primary-light), var(--ts-secondary-color));
+}
+
+.ts-cancel-icon,
+.ts-save-icon {
+  font-size: 14px;
+}
+
+.ts-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.ts-modal {
+  background: #fff;
+  padding: 24px;
+  border-radius: 12px;
+  width: 320px;
+  text-align: center;
+  animation: pop 0.25s ease;
+}
+
+.ts-modal.success {
+  border-top: 5px solid #22c55e;
+}
+
+.ts-modal.error {
+  border-top: 5px solid #ef4444;
+}
+
+.ts-modal-icon {
+  font-size: 36px;
+  margin-bottom: 8px;
+}
+
+.ts-modal-title {
+  margin: 0;
+  font-size: 20px;
+}
+
+.ts-modal-message {
+  margin: 12px 0 20px;
+  color: #555;
+}
+
+.ts-modal-btn {
+  padding: 8px 20px;
+  border: none;
+  border-radius: 6px;
+  background: #2563eb;
+  color: white;
+  cursor: pointer;
+}
+
+.ts-modal-btn:hover {
+  background: #1e40af;
+}
+
+@keyframes pop {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

@@ -318,53 +318,61 @@
   color: var(--acd-text-color);
   margin: 0;
   padding-bottom: 12px;
-  border-bottom: 2px solid var(--acd-border-color);
 }
 
-/* Table Container */
+/* Table Container - Remove borders */
 .acd-table-container {
   overflow-x: auto;
   border-radius: var(--acd-border-radius);
   box-shadow: var(--acd-shadow);
   margin-bottom: 24px;
-  border: 1px solid var(--acd-border-color);
+  border: none;
 }
 
 .acd-performance-table {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 0;
   background: var(--acd-card-bg);
   min-width: 1000px;
+  white-space: nowrap;
+  border: none;
 }
 
 .acd-performance-table thead {
   background: linear-gradient(135deg, var(--acd-primary-color), var(--acd-secondary-color));
+  /* Remove border from header */
+  border: none;
 }
 
 .acd-performance-table th {
   padding: 16px 20px;
-  text-align: left;
+  text-align: center;
   font-weight: 600;
   font-size: 14px;
   color: white;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  border-bottom: 2px solid var(--acd-border-color);
+  /* Remove border from header cells */
+  border: none;
 }
 
 .acd-performance-table td {
   padding: 16px 20px;
   font-size: 14px;
   vertical-align: middle;
-  border-bottom: 1px solid var(--acd-border-color);
+  border: none;
 }
 
+/* Remove alternating row background */
 .acd-performance-table tbody tr:nth-child(even) {
-  background-color: rgba(243, 244, 246, 0.5);
+  background-color: transparent;
 }
 
 .acd-performance-table tbody tr {
   transition: var(--acd-transition);
+  /* Remove borders from rows */
+  border: none;
 }
 
 .acd-performance-table tbody tr:hover {
@@ -534,6 +542,185 @@
   color: var(--acd-primary-light);
 }
 
+/* Aksi Cepat Section */
+.acd-quick-actions {
+  margin: 32px 0 24px 0;
+}
+
+.acd-bottom-section-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--acd-text-color);
+  margin: 0 0 16px 0;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--acd-border-color);
+}
+
+.acd-quick-actions-grid {
+  display: flex;
+  gap: 16px;
+}
+
+.acd-quick-action-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
+  background: var(--acd-card-bg);
+  border-radius: var(--acd-border-radius);
+  box-shadow: var(--acd-shadow);
+  border: 1px solid var(--acd-border-color);
+  transition: var(--acd-transition);
+  cursor: pointer;
+  flex: 1;
+}
+
+.acd-quick-action-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--acd-shadow-lg);
+}
+
+.acd-quick-action-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.acd-quick-action-content h4 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--acd-text-color);
+  margin: 0 0 4px 0;
+}
+
+.acd-quick-action-content p {
+  font-size: 14px;
+  color: var(--acd-text-muted);
+  margin: 0;
+}
+
+/* Statistik Wilayah Section */
+.acd-region-stats {
+  background: var(--acd-card-bg);
+  padding: 24px;
+  border-radius: var(--acd-border-radius);
+  box-shadow: var(--acd-shadow);
+  border: 1px solid var(--acd-border-color);
+}
+
+.acd-stats-content {
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+}
+
+.acd-pie-charts {
+  display: flex;
+  gap: 50px;
+  flex: 1;
+}
+
+.acd-pie-chart-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+}
+
+.acd-pie-chart-group h4 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--acd-text-color);
+  margin: 0 0 16px 0;
+  text-align: center;
+}
+
+.acd-chart-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.acd-pie-chart {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.acd-chart-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.acd-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.acd-legend-color {
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+
+.acd-legend-item span {
+  font-size: 14px;
+  color: var(--acd-text-color);
+  font-weight: 500;
+}
+
+/* Stats Details */
+.acd-stats-details {
+  flex: 1;
+}
+
+.acd-stats-list {
+  background: #f8fafc;
+  padding: 20px;
+  border-radius: var(--acd-border-radius);
+  border: 1px solid var(--acd-border-color);
+}
+
+.acd-stats-list h4 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--acd-text-color);
+  margin: 0 0 16px 0;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--acd-border-color);
+}
+
+.acd-stats-detail-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.acd-stats-detail-item:last-child {
+  border-bottom: none;
+}
+
+.acd-stats-detail-item span {
+  font-size: 14px;
+  color: var(--acd-text-color);
+}
+
+.acd-stat-percentage {
+  font-weight: 600;
+  color: var(--acd-primary-color) !important;
+}
+
 /* Responsive Design */
 @media (max-width: 1024px) {
   .acd-main {
@@ -557,6 +744,15 @@
   
   .acd-search-wrapper input {
     min-width: 200px;
+  }
+  
+  .acd-stats-content {
+    flex-direction: column;
+    gap: 30px;
+  }
+  
+  .acd-pie-charts {
+    gap: 40px;
   }
 }
 
@@ -598,6 +794,20 @@
   .acd-search-wrapper input {
     min-width: 180px;
   }
+  
+  .acd-quick-actions-grid {
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .acd-pie-charts {
+    flex-direction: column;
+    gap: 30px;
+  }
+  
+  .acd-stats-content {
+    gap: 24px;
+  }
 }
 
 @media (max-width: 640px) {
@@ -624,6 +834,12 @@
   .acd-search-wrapper input {
     min-width: auto;
     width: 100%;
+  }
+  
+  .acd-quick-action-card {
+    flex-direction: column;
+    text-align: center;
+    gap: 12px;
   }
 }
 
@@ -662,4 +878,112 @@
 
 .acd-table-container::-webkit-scrollbar-thumb:hover {
   background: #94a3b8;
+}
+
+/* Search and Add Button Row */
+.acd-search-add-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.acd-add-school-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  background: linear-gradient(135deg, var(--acd-primary-color), var(--acd-secondary-color));
+  color: white;
+  border: none;
+  border-radius: var(--acd-border-radius);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--acd-transition);
+  box-shadow: var(--acd-shadow);
+}
+
+.acd-add-school-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--acd-shadow-lg);
+  background: linear-gradient(135deg, var(--acd-primary-light), var(--acd-secondary-color));
+}
+
+.acd-add-icon {
+  font-size: 14px;
+}
+
+/* Responsive Design untuk Search Add Row */
+@media (max-width: 768px) {
+  .acd-search-add-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+  
+  .acd-add-school-btn {
+    justify-content: center;
+    width: 100%;
+  }
+  
+  .acd-search-wrapper {
+    width: 100%;
+  }
+  
+  .acd-search-wrapper input {
+    width: 100%;
+  }
+}
+
+@media (max-width: 640px) {
+  .acd-search-add-row {
+    margin-bottom: 16px;
+  }
+}
+
+
+.loading-fullscreen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: white;
+  z-index: 9999;
+}
+
+.loading-fullscreen .spinner {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #4f46e5;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+  margin-bottom: 16px;
+}
+
+.loading-fullscreen p {
+  color: #6b7280;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+
+.acd-status-badge.aktif {
+  color: #166534;
+}
+
+.acd-status-badge.nonaktif {
+  color: #991b1b;
 }

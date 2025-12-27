@@ -1,0 +1,446 @@
+/* DataGuru.css - Konsisten dengan DashboardA.css */
+
+/* Filter Section */
+.acd-filter-section {
+  background: var(--acd-card-bg);
+  padding: 24px 32px;
+  border-radius: var(--acd-border-radius);
+  box-shadow: var(--acd-shadow);
+  border: 1px solid var(--acd-border-color);
+  margin-bottom: 28px;
+}
+
+.acd-filter-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--acd-border-color);
+}
+
+.acd-filter-icon {
+  color: var(--acd-primary-color);
+  font-size: 18px;
+}
+
+.acd-filter-header h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--acd-text-color);
+  margin: 0;
+}
+
+.acd-filter-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.acd-filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.acd-filter-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--acd-text-color);
+}
+
+.acd-filter-select {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid var(--acd-border-color);
+  border-radius: 8px;
+  font-size: 14px;
+  transition: var(--acd-transition);
+  background: white;
+  color: var(--acd-text-color);
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+  background-position: right 12px center;
+  background-repeat: no-repeat;
+  background-size: 16px;
+}
+
+.acd-filter-select:focus {
+  outline: none;
+  border-color: var(--acd-primary-light);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.acd-search-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.acd-search-icon {
+  position: absolute;
+  left: 12px;
+  color: var(--acd-text-muted);
+  font-size: 14px;
+}
+
+.acd-search-input {
+  width: 100%;
+  padding: 12px 16px 12px 40px;
+  border: 1px solid var(--acd-border-color);
+  border-radius: 8px;
+  font-size: 14px;
+  transition: var(--acd-transition);
+  background: white;
+  color: var(--acd-text-color);
+}
+
+.acd-search-input:focus {
+  outline: none;
+  border-color: var(--acd-primary-light);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Notification Bell Styles - Sama seperti Dashboard */
+.acd-notification-btn {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  border-radius: var(--acd-border-radius);
+  cursor: pointer;
+  color: var(--acd-warning-color);
+  font-size: 18px;
+  transition: var(--acd-transition);
+}
+
+.acd-notification-btn:hover {
+  background-color: rgba(59, 130, 246, 0.1);
+  color: var(--acd-primary-light);
+}
+
+.acd-notification-dot {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 8px;
+  height: 8px;
+  background-color: var(--acd-danger-color);
+  border-radius: 50%;
+  border: 2px solid var(--acd-card-bg);
+}
+
+/* Table Section */
+.acd-table-section {
+  background: var(--acd-card-bg);
+  border-radius: var(--acd-border-radius);
+  box-shadow: var(--acd-shadow);
+  border: 1px solid var(--acd-border-color);
+  overflow: hidden;
+}
+
+.acd-table-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 32px;
+  border-bottom: 1px solid var(--acd-border-color);
+  background: #f8fafc;
+}
+
+.acd-table-header h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--acd-text-color);
+  margin: 0;
+}
+
+.acd-table-count {
+  font-size: 14px;
+  color: var(--acd-text-muted);
+  font-weight: 500;
+}
+
+.acd-table-container {
+  overflow-x: auto;
+  border-radius: var(--acd-border-radius);
+  box-shadow: var(--acd-shadow);
+  margin-bottom: 24px;
+  border: 1px solid var(--acd-border-color);
+}
+
+.acd-performance-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--acd-card-bg);
+  min-width: 1000px;
+}
+
+/* Header Tabel - Sama seperti Dashboard */
+.acd-performance-table thead {
+  background: linear-gradient(135deg, var(--acd-primary-color), var(--acd-secondary-color));
+}
+
+.acd-performance-table th {
+  padding: 16px 20px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 14px;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 2px solid var(--acd-border-color);
+}
+
+.acd-performance-table td {
+  padding: 16px 20px;
+  font-size: 14px;
+  vertical-align: middle;
+}
+
+/* Text Alignment untuk Kolom Tertentu */
+.acd-performance-table td:nth-child(4), /* Kolom Tgl Pensiun */
+.acd-performance-table td:nth-child(5), /* Kolom Sisa Waktu Pensiun */
+.acd-performance-table td:nth-child(6) { /* Kolom Aksi */
+  text-align: center;
+}
+
+/* Baris tabel - Sama seperti Dashboard */
+.acd-performance-table tbody tr:nth-child(even) {
+  background-color: rgba(243, 244, 246, 0.5);
+}
+
+.acd-performance-table tbody tr {
+  transition: var(--acd-transition);
+  border-bottom: 1px solid var(--acd-border-color);
+}
+
+.acd-performance-table tbody tr:hover {
+  background-color: rgba(59, 130, 246, 0.05);
+}
+
+.acd-performance-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+/* Table Cells */
+.acd-guru-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-align: left;
+}
+
+.acd-guru-nama {
+  font-weight: 600;
+  color: var(--acd-text-color);
+  font-size: 14px;
+}
+
+.acd-guru-nip {
+  font-size: 12px;
+  color: var(--acd-text-muted);
+}
+
+/* Badges */
+.acd-sekolah-badge,
+.acd-mapel-badge {
+  display: inline-block;
+  padding: 6px 12px;
+  background: rgba(59, 130, 246, 0.1);
+  color: var(--acd-primary-color);
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.acd-mapel-badge {
+  background: rgba(124, 58, 237, 0.1);
+  color: var(--acd-secondary-color);
+}
+
+/* Tanggal Pensiun */
+.acd-tanggal {
+  font-weight: 500;
+  color: var(--acd-text-color);
+}
+
+/* Status Badges */
+.acd-sisa-waktu {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.acd-sisa-waktu.acd-warning {
+  background: rgba(217, 119, 6, 0.1);
+  color: var(--acd-warning-color);
+}
+
+.acd-sisa-waktu.acd-info {
+  background: rgba(8, 145, 178, 0.1);
+  color: var(--acd-info-color);
+}
+
+/* Actions Cell - Sama seperti Dashboard */
+.acd-actions-cell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 0;
+}
+
+.acd-action-btn {
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0px;
+  transition: all 0.3s ease;
+  background: transparent;
+  margin-left: 50px;
+}
+
+.acd-view-btn {
+  color: var(--acd-primary-light);
+}
+
+.acd-view-btn:hover {
+  background-color: rgba(59, 130, 246, 0.1);
+  transform: translateY(-2px);
+}
+
+.acd-action-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+.acd-text-center {
+  text-align: center;
+}
+
+/* Empty State */
+.acd-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.acd-empty-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+  opacity: 0.5;
+}
+
+.acd-empty-state h4 {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--acd-text-color);
+  margin: 0 0 8px 0;
+}
+
+.acd-empty-state p {
+  font-size: 14px;
+  color: var(--acd-text-muted);
+  margin: 0;
+}
+
+.acd-no-data-message {
+  text-align: center;
+  padding: 40px !important;
+  color: var(--acd-text-muted);
+  font-style: italic;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .acd-filter-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .acd-filter-section {
+    padding: 20px 24px;
+  }
+  
+  .acd-filter-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  
+  .acd-table-header {
+    padding: 16px 20px;
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+  }
+  
+  .acd-performance-table th,
+  .acd-performance-table td {
+    padding: 12px 16px;
+  }
+}
+
+@media (max-width: 640px) {
+  .acd-filter-section {
+    padding: 16px 20px;
+  }
+  
+  .acd-guru-info {
+    min-width: 150px;
+  }
+}
+
+/* Animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.acd-performance-table tbody tr {
+  animation: fadeInUp 0.5s ease-out;
+}
+
+.acd-performance-table tbody tr:nth-child(1) { animation-delay: 0.1s; }
+.acd-performance-table tbody tr:nth-child(2) { animation-delay: 0.2s; }
+.acd-performance-table tbody tr:nth-child(3) { animation-delay: 0.3s; }
+
+/* Scrollbar Styling */
+.acd-table-container::-webkit-scrollbar {
+  height: 8px;
+}
+
+.acd-table-container::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 4px;
+}
+
+.acd-table-container::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+.acd-table-container::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}

@@ -1,33 +1,32 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
-* {
+/* RESET hanya untuk login */
+.login-page * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
 }
 
-html,
-body {
+/* pastikan scroll halaman lain gak ke-disable */
+html, body {
   width: 100%;
   height: 100%;
-  font-family: 'Poppins', sans-serif;
-  overflow: hidden;
 }
 
-body {
-  background: url('../../../assets/images/bg1.jpg') center/cover no-repeat fixed;
-  position: relative;
-}
-
+/* Latar belakang login */
 .login-page {
   display: flex;
   width: 100vw;
   height: 100vh;
   position: relative;
-  z-index: 2; /* di atas overlay */
+  z-index: 2;
+  overflow: hidden; /* hanya login yang hidden */
+  background: url('../../../assets/images/bg1.jpg') center/cover no-repeat fixed;
 }
 
-.login-info {
+/* ---- KIRI: Info ---- */
+.login-page .login-info {
   flex: 1.2;
   display: flex;
   flex-direction: column;
@@ -35,24 +34,24 @@ body {
   padding: 40px;
 }
 
-.login-info h1,
-.login-info p {
+.login-page .login-info h1,
+.login-page .login-info p {
   color: #fff;
 }
 
-.login-info h1 {
+.login-page .login-info h1 {
   font-size: 50px;
   font-weight: 600;
   margin-bottom: 16px;
 }
 
-.login-info p {
+.login-page .login-info p {
   font-size: 25px;
   line-height: 1.5;
 }
 
-/* ---- RIGHT PANEL: Card Container ---- */
-.login-card-container {
+/* ---- KANAN: Card Container ---- */
+.login-page .login-card-container {
   flex: 0.8;
   display: flex;
   justify-content: center;
@@ -61,7 +60,7 @@ body {
 }
 
 /* ---- LOGIN CARD ---- */
-.login-card {
+.login-page .login-card {
   width: 500px;
   max-width: 70%;
   padding: 32px;
@@ -73,28 +72,27 @@ body {
   outline-color: gray;
 }
 
-.login-icon {
+.login-page .login-icon {
   font-size: 48px;
   color: #0069d9;
   margin-bottom: 16px;
 }
 
-.login-card h2 {
-  /* text-transform: lowercase; */
+.login-page .login-card h2 {
   font-size: 24px;
   font-weight: 600;
   color: white;
   margin-bottom: 8px;
 }
 
-.subtext {
+.login-page .subtext {
   font-size: 14px;
   color: white;
   margin-bottom: 24px;
 }
 
 /* ---- ERROR MESSAGE ---- */
-.login-error {
+.login-page .login-error {
   background: #ffe5e5;
   color: #c00;
   padding: 8px 12px;
@@ -105,20 +103,19 @@ body {
 }
 
 /* ---- FORM FIELDS ---- */
-.form-group {
+.login-page .form-group {
   margin-bottom: 20px;
   text-align: left;
 }
 
-.form-group label {
+.login-page .form-group label {
   display: block;
   font-size: 14px;
   color: white;
   margin-bottom: 6px;
 }
 
-/* Tambahan: latar putih pada text box */
-.form-group input {
+.login-page .form-group input {
   width: 100%;
   height: 42px;
   padding: 0 12px;
@@ -130,11 +127,11 @@ body {
 }
 
 /* ---- PASSWORD WRAPPER ---- */
-.password-wrapper {
+.login-page .password-wrapper {
   position: relative;
 }
 
-.toggle-password {
+.login-page .toggle-password {
   position: absolute;
   top: 50%;
   right: 12px;
@@ -145,35 +142,25 @@ body {
   cursor: pointer;
 }
 
-/* ---- OPTIONS: Remember & Forgot ---- */
-.form-options {
+/* ---- OPTIONS ---- */
+.login-page .form-options {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 24px;
 }
 
-.remember {
+.login-page .remember {
   font-size: 14px;
   color: white;
 }
 
-.remember input {
+.login-page .remember input {
   margin-right: 6px;
   background-color: #ffffff;
 }
 
-.forgot {
-  font-size: 14px;
-  color: #0069d9;
-  text-decoration: none;
-}
-
-.forgot:hover {
-  text-decoration: underline;
-}
-
-.btn-login {
+.login-page .btn-login {
   width: 100%;
   height: 44px;
   background: #0069d9;
@@ -186,18 +173,12 @@ body {
   transition: background 0.2s ease;
 }
 
-.btn-login:hover {
+.login-page .btn-login:hover {
   background: #0053a6;
 }
 
-/* ---- HELP TEXT ---- */
-.help-text {
-  font-size: 13px;
-  color: white;
-  margin-top: 20px;
-}
-
-.loading-spinner {
+/* ---- SPINNER ---- */
+.login-page .loading-spinner {
   display: inline-block;
   width: 16px;
   height: 16px;
@@ -209,25 +190,7 @@ body {
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
-}
-
-.login-hint {
-  margin-top: 20px;
-  padding: 15px;
-  background: #f8f9fa;
-  border-radius: 8px;
-  border-left: 4px solid #007bff;
-  font-size: 12px;
-}
-
-.login-hint code {
-  background: #e9ecef;
-  padding: 2px 6px;
-  border-radius: 4px;
-  font-family: 'Courier New', monospace;
-}
-
-.login-hint p {
-  margin: 5px 0;
+  to {
+    transform: rotate(360deg);
+  }
 }

@@ -1,12 +1,23 @@
 import React, { useState, useEffect } from 'react';
-import { FaBars, FaSearch, FaEye, FaSchool, FaUserGraduate, FaClock, FaUsers } from 'react-icons/fa';
+import axios from 'axios';
+import { FaSearch, FaEye, FaSchool, FaUserGraduate, FaUsers, FaPlus } from 'react-icons/fa';
 import SidebarAdminCabdin from '../Sidebar/SidebarA';
+import { useNavigate } from 'react-router-dom';
 import './DashboardA.css';
+import api from '../../../services/api';
 
 export default function DashboardAdminCabdin() {
   const [collapsed, setCollapsed] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const [dashboard, setDashboard] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
+
+  const handleViewDetail = (sekolahId) => {
+    navigate(`/admin-cabdin/detail-sekolah/${sekolahId}`);
+  };
 
   useEffect(() => {
     const checkMobile = () => {
@@ -20,116 +31,229 @@ export default function DashboardAdminCabdin() {
     checkMobile();
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
-  }, []);
+  }, []);  
 
+  // useEffect untuk fetch data dengan loading
+  useEffect(() => {
+    const fetchDashboard = async () => {
+      try {
+        setLoading(true); // Mulai loading
+        setError(null); // Reset error
+        
+        const res = await api.get('/dashboard-admin');
+
+        console.log("FULL RESPONSE:", res.data);
+    console.log("DETAIL STATS:", res.data.stats.detail);
+        setDashboard(res.data);
+      } catch (err) {
+        
+        console.error("Gagal memuat data dashboard:", err);
+        setError("Gagal memuat data dashboard. Silakan coba lagi.");
+      } finally {
+        setLoading(false); // Selesai loading (baik sukses maupun error)
+      }
+    };
+    fetchDashboard();
+  }, []);
+  
   const handleToggleSidebar = () => {
     setCollapsed(prev => !prev);
   };
 
-  // Data statistik
+  const handleTambahSekolah = () => {
+    navigate('/admin-cabdin/tambah-sekolah');
+  };
+
+  const handleDataGuru = () => {
+    navigate('/admin-cabdin/data-guru');
+  };
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5;
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchQuery]);
+  
+  // Loading state
+  if (loading) {
+    return (
+      <div className="acd-app">
+        <SidebarAdminCabdin collapsed={collapsed} onToggle={handleToggleSidebar} />
+        {isMobile && !collapsed && (
+          <div 
+            className="acd-sidebar-overlay"
+            onClick={() => setCollapsed(true)}
+            />
+        )}
+        <main className={`acd-main ${collapsed ? 'sidebar-collapsed' : ''}`}>
+          <div className="acd-loading-screen">
+            <div className="spinner"></div>
+            {/* <p>Memuat data dashboard...</p> */}
+          </div>
+        </main>
+      </div>
+    );
+  }
+
+  // Error state
+  if (error) {
+    return (
+      <div className="acd-app">
+        <SidebarAdminCabdin collapsed={collapsed} onToggle={handleToggleSidebar} />
+        {isMobile && !collapsed && (
+          <div 
+            className="acd-sidebar-overlay"
+            onClick={() => setCollapsed(true)}
+          />
+        )}
+        <main className={`acd-main ${collapsed ? 'sidebar-collapsed' : ''}`}>
+          <div className="acd-error-screen">
+            <div className="acd-error-icon">⚠️</div>
+            <h3>Terjadi Kesalahan</h3>
+            <p>{error}</p>
+            <button 
+              className="acd-retry-btn" 
+              onClick={() => window.location.reload()}
+            >
+              Coba Lagi
+            </button>
+          </div>
+        </main>
+      </div>
+    );
+  }
+
+  // Data tidak ditemukan
+  if (!dashboard) {
+    return (
+      <div className="acd-app">
+        <SidebarAdminCabdin collapsed={collapsed} onToggle={handleToggleSidebar} />
+        {isMobile && !collapsed && (
+          <div 
+            className="acd-sidebar-overlay"
+            onClick={() => setCollapsed(true)}
+          />
+        )}
+        <main className={`acd-main ${collapsed ? 'sidebar-collapsed' : ''}`}>
+          <div className="acd-error-screen">
+            <div className="acd-error-icon">🔍</div>
+            <h3>Data Tidak Ditemukan</h3>
+            <p>Data dashboard tidak tersedia.</p>
+          </div>
+        </main>
+      </div>
+    );
+  }
+
+  // ✅ Data dari backend
   const statsData = [
     {
       icon: <FaSchool />,
       title: 'Total Sekolah',
-      value: '1145',
+      value: dashboard.stats.total_sekolah,
       subtitle: 'Sekolah',
-      detail: 'SMA 86, SMK 74, SLB 17',
+      detail: `SMA ${dashboard.sekolah_pie.find(i => i.label === 'SMA')?.value || 0}%, SMK ${dashboard.sekolah_pie.find(i => i.label === 'SMK')?.value || 0}%, SLB ${dashboard.sekolah_pie.find(i => i.label === 'SLB')?.value || 0}%`,
       color: '#3b82f6'
-    },
-    {
-      icon: <FaClock />,
-      title: 'Usulan Pending',
-      value: '2',
-      subtitle: 'Usulan',
-      detail: 'Menunggu Verifikasi',
-      color: '#f59e0b'
     },
     {
       icon: <FaUsers />,
       title: 'Total Guru',
-      value: '2180',
+      value: dashboard.stats.total_guru,
       subtitle: 'Guru',
-      detail: 'PNS 1080, P3K 1000, P3PW 100',
+      detail: `PNS ${dashboard.stats?.detail?.pns || 0}, P3K ${dashboard.stats?.detail?.p3k || 0}, P3K Paruh Waktu ${dashboard.stats?.detail?.paruh_waktu || 0}`,
       color: '#10b981'
     },
     {
       icon: <FaUserGraduate />,
       title: 'Guru Akan Pensiun',
-      value: '17',
+      value: dashboard.stats.guru_akan_pensiun,
       subtitle: 'Guru',
       detail: 'Dalam 3 Tahun',
       color: '#ef4444'
     }
   ];
-
-  // Data sekolah contoh (disederhanakan dari gambar)
-  const sekolahData = [
-    {
-      id: 1,
-      nama: 'SMK N 1 Surakarta',
-      alamat: 'Jl. Sungai Kapuas No. 28 Surakarta',
-      jenjang: 'SMK',
-      jumlahGuru: 45,
-      pns: 25,
-      p3k: 15,
-      paruhWaktu: 5,
-      masaPensiun: 3
-    },
-    {
-      id: 2,
-      nama: 'SMK N 2 Surakarta',
-      alamat: 'Jl. Walter Monginsidi No.40, Gilingan',
-      jenjang: 'SMK',
-      jumlahGuru: 38,
-      pns: 20,
-      p3k: 12,
-      paruhWaktu: 6,
-      masaPensiun: 2
-    },
-    {
-      id: 3,
-      nama: 'SMK N 1 Sukoharjo',
-      alamat: 'Jl. Jend. Sudirman No.151, Gabusan',
-      jenjang: 'SMK',
-      jumlahGuru: 42,
-      pns: 22,
-      p3k: 16,
-      paruhWaktu: 4,
-      masaPensiun: 5
-    },
-    {
-      id: 4,
-      nama: 'SMK N 9 Surakarta',
-      alamat: 'Jl. Tarumanegara I, Banyuanyar',
-      jenjang: 'SMK',
-      jumlahGuru: 35,
-      pns: 18,
-      p3k: 14,
-      paruhWaktu: 3,
-      masaPensiun: 1
-    },
-    {
-      id: 5,
-      nama: 'SMK N 10',
-      alamat: 'Jl. Wisanggeni No.01, RW.07, Serengan',
-      jenjang: 'SMK',
-      jumlahGuru: 40,
-      pns: 21,
-      p3k: 15,
-      paruhWaktu: 4,
-      masaPensiun: 4
-    }
-  ];
+  
+  const sekolahData = dashboard.daftar_sekolah || [];
 
   const filteredSekolah = sekolahData.filter(sekolah =>
     sekolah.nama.toLowerCase().includes(searchQuery.toLowerCase()) ||
     sekolah.alamat.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
+  const totalPages = Math.ceil(filteredSekolah.length / itemsPerPage);
+
+  const paginatedSekolah = filteredSekolah.slice(startIndex, startIndex + itemsPerPage);
+  const guruData = dashboard.guru_pie || [];
+  const sekolahJenisData = dashboard.sekolah_pie || [];
+const handlePrevPage = () => {
+  setCurrentPage((prev) => Math.max(prev - 1, 1));
+};
+
+const handleNextPage = () => {
+  setCurrentPage((prev) => Math.min(prev + 1, totalPages));
+};
+
+const handlePageClick = (page) => {
+  setCurrentPage(page);
+};
+
+  const PieChart = ({ data, size = 120 }) => {
+  let accumulated = 0;
+  const center = size / 2;
+  const radius = size / 2 - 10;
+
+  return (
+    <div className="acd-pie-chart" style={{ width: size, height: size }}>
+      <svg
+        width={size}
+        height={size}
+        viewBox={`0 0 ${size} ${size}`}
+      >
+        {data.map((item, index) => {
+          const startAngle = accumulated;
+          const endAngle = accumulated + item.value * 3.6;
+          accumulated = endAngle;
+
+          const startRad = (startAngle * Math.PI) / 180;
+          const endRad = (endAngle * Math.PI) / 180;
+
+          const startX = center + radius * Math.cos(startRad);
+          const startY = center + radius * Math.sin(startRad);
+          const endX = center + radius * Math.cos(endRad);
+          const endY = center + radius * Math.sin(endRad);
+
+          const largeArcFlag = item.value > 50 ? 1 : 0;
+
+          const pathData = `
+            M ${center} ${center}
+            L ${startX} ${startY}
+            A ${radius} ${radius} 0 ${largeArcFlag} 1 ${endX} ${endY}
+            Z
+          `;
+
+          return (
+            <path
+              key={index}
+              d={pathData}
+              fill={item.color}     // 🔥 WARNA AMAN
+              stroke="#fff"
+              strokeWidth="2"
+            />
+          );
+        })}
+
+        {/* inner hole */}
+        <circle cx={center} cy={center} r={radius / 2} fill="#fff" />
+      </svg>
+    </div>
+  );
+};
+
+  // Konten utama ketika sudah selesai loading dan data tersedia
   return (
     <div className="acd-app">
       <SidebarAdminCabdin collapsed={collapsed} onToggle={handleToggleSidebar} />
-      
       {/* Overlay for mobile when sidebar is open */}
       {isMobile && !collapsed && (
         <div 
@@ -137,9 +261,7 @@ export default function DashboardAdminCabdin() {
           onClick={() => setCollapsed(true)}
         />
       )}
-
       <main className={`acd-main ${collapsed ? 'sidebar-collapsed' : ''}`}>
-        {/* Top Bar */}
         <header className="acd-header">
           <div className="acd-header-left">
             <div className="acd-title-section">
@@ -147,30 +269,10 @@ export default function DashboardAdminCabdin() {
               <div className="acd-subtitle">Cabang Dinas Pendidikan Wilayah VII</div>
             </div>
           </div>
-
-          <div className="acd-header-actions">
-            <div className="acd-search-wrapper">
-              <input
-                type="text"
-                placeholder="Cari sekolah..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                aria-label="Cari sekolah"
-              />
-              <button className="acd-search-btn" aria-label="Search">
-                <FaSearch />
-              </button>
-            </div>
-            <button className="acd-notification-btn" aria-label="Notifikasi">
-              🔔
-              <span className="acd-notification-dot" />
-            </button>
-          </div>
         </header>
 
-        {/* Main Content */}
         <div className="acd-content">
-          {/* Statistics Cards */}
+          {/* Statistik Cards */}
           <div className="acd-stats-grid">
             {statsData.map((stat, index) => (
               <div key={index} className="acd-stat-card">
@@ -189,10 +291,24 @@ export default function DashboardAdminCabdin() {
             ))}
           </div>
 
-          {/* Performance Section */}
+          {/* Tabel Sekolah */}
           <div className="acd-performance-section">
             <div className="acd-section-header">
               <h2 className="acd-section-title">Performa Sekolah</h2>
+            </div>
+            <div className="acd-search-add-row">
+              <div className="acd-search-wrapper">
+                <input
+                  type="text"
+                  placeholder="Cari sekolah..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                />
+                <button className="acd-search-btn"><FaSearch /></button>
+              </div>
+              <button className="acd-add-school-btn" onClick={handleTambahSekolah}>
+                <FaPlus className="acd-add-icon" /> Tambah Sekolah
+              </button>
             </div>
 
             <div className="acd-table-container">
@@ -205,39 +321,41 @@ export default function DashboardAdminCabdin() {
                     <th>PNS</th>
                     <th>P3K</th>
                     <th>Paruh Waktu</th>
-                    <th>Masa Akan Pensiun</th>
+                    <th>Guru yang Akan Pensiun</th>
+                    <th>Status</th>
                     <th>Aksi</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {filteredSekolah.map((sekolah) => (
-                    <tr key={sekolah.id}>
+                  {paginatedSekolah.map((s) => (
+                    <tr key={s.id}>
                       <td className="acd-school-cell">
-                        <div className="acd-school-name">{sekolah.nama}</div>
-                        <div className="acd-school-address">{sekolah.alamat}</div>
+                        <div className="acd-school-name">{s.nama}</div>
+                        <div className="acd-school-address">{s.alamat}</div>
                       </td>
-                      <td className="acd-jenjang-cell">
-                        <span className="acd-jenjang-badge">{sekolah.jenjang}</span>
-                      </td>
-                      <td className="acd-count-cell">{sekolah.jumlahGuru}</td>
-                      <td className="acd-count-cell">{sekolah.pns}</td>
-                      <td className="acd-count-cell">{sekolah.p3k}</td>
-                      <td className="acd-count-cell">{sekolah.paruhWaktu}</td>
-                      <td className="acd-pensiun-cell">
-                        <span className="acd-pensiun-badge">{sekolah.masaPensiun} Tahun</span>
-                      </td>
-                      <td className="acd-actions-cell">
-                        <button 
-                          className="acd-action-btn acd-view-btn" 
-                          aria-label="Lihat detail"
-                          title="Lihat Detail"
-                        >
+                      <td><span className="acd-jenjang-badge">{s.jenjang}</span></td>
+                      <td className="acd-count-cell">{s.jumlahGuru}</td>
+                      <td className="acd-count-cell">{s.pns}</td>
+                      <td className="acd-count-cell">{s.p3k}</td>
+                      <td className="acd-count-cell">{s.p3k_paruh_waktu}</td>
+                      <td><span className="acd-pensiun-badge">{s.masaPensiun} Orang</span></td>
+                      <td>
+  <span
+    className={`acd-status-badge ${
+      s.status === 'aktif' ? 'aktif' : 'nonaktif'
+    }`}
+  >
+    {s.status === 'aktif' ? 'Aktif' : 'Nonaktif'}
+  </span>
+</td>
+
+                      <td>
+                        <button className="acd-action-btn acd-view-btn" onClick={() => handleViewDetail(s.id)}>
                           <FaEye />
                         </button>
                       </td>
                     </tr>
                   ))}
-                  
                   {filteredSekolah.length === 0 && (
                     <tr>
                       <td colSpan="8" className="acd-no-data-message">
@@ -249,22 +367,101 @@ export default function DashboardAdminCabdin() {
               </table>
             </div>
 
-            {/* Pagination */}
             <div className="acd-pagination-section">
-              <div className="acd-pagination">
-                <button className="acd-pagination-btn acd-prev-btn">
-                  Sebelumnya
-                </button>
-                
-                <div className="acd-page-numbers">
-                  <button className="acd-page-btn active">1</button>
-                  <button className="acd-page-btn">2</button>
-                  <button className="acd-page-btn">3</button>
+  <div className="acd-pagination">
+    <button
+      className="acd-pagination-btn acd-prev-btn"
+      onClick={handlePrevPage}
+      disabled={currentPage === 1}
+    >
+      Sebelumnya
+    </button>
+
+    <div className="acd-page-numbers">
+      {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+        <button
+          key={page}
+          className={`acd-page-btn ${currentPage === page ? 'active' : ''}`}
+          onClick={() => handlePageClick(page)}
+        >
+          {page}
+        </button>
+      ))}
+    </div>
+
+    <button
+      className="acd-pagination-btn acd-next-btn"
+      onClick={handleNextPage}
+      disabled={currentPage === totalPages}
+    >
+      Selanjutnya
+    </button>
+  </div>
+</div>
+
+
+            {/* Aksi Cepat Section */}
+            <div className="acd-quick-actions">
+              
+            </div>
+
+            {/* Pie Charts */}
+            <div className="acd-region-stats">
+              <h3 className="acd-bottom-section-title">Statistik Wilayah</h3>
+              <div className="acd-stats-content">
+                <div className="acd-pie-charts">
+                  <div className="acd-pie-chart-group">
+                    <h4>Status Guru</h4>
+                    <div className="acd-chart-container">
+                      <PieChart data={guruData} size={140} />
+                      <div className="acd-chart-legend">
+                        {guruData.map((item, i) => (
+                          <div key={i} className="acd-legend-item">
+                            <div className="acd-legend-color" style={{ backgroundColor: item.color }}></div>
+                            <span>{item.label} {item.value}%</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="acd-pie-chart-group">
+                    <h4>Jenjang Sekolah</h4>
+                    <div className="acd-chart-container">
+                      <PieChart data={sekolahJenisData} size={140} />
+                      <div className="acd-chart-legend">
+                        {sekolahJenisData.map((item, i) => (
+                          <div key={i} className="acd-legend-item">
+                            <div className="acd-legend-color" style={{ backgroundColor: item.color }}></div>
+                            <span>{item.label} {item.value}%</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                
-                <button className="acd-pagination-btn acd-next-btn">
-                  Selanjutnya
-                </button>
+                <div className="acd-stats-details">
+                  <div className="acd-stats-list">
+                    <h4>Detail Statistik</h4>
+
+                    {/* Statistik Guru */}
+                    {guruData.map((item, i) => (
+                      <div key={`guru-${i}`} className="acd-stats-detail-item">
+                        <span>{item.label}</span>
+                        <span className="acd-stat-percentage">{item.value}%</span>
+                      </div>
+                    ))}
+
+                    <hr style={{ margin: '10px 0', border: 'none', borderTop: '1px solid #ddd' }} />
+
+                    {/* Statistik Jenjang Sekolah */}
+                    {sekolahJenisData.map((item, i) => (
+                      <div key={`sekolah-${i}`} className="acd-stats-detail-item">
+                        <span>{item.label}</span>
+                        <span className="acd-stat-percentage">{item.value}%</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
           </div>

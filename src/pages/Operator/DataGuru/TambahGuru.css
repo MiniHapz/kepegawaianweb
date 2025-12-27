@@ -1,0 +1,574 @@
+/* src/pages/Operator/TambahGuru/TambahGuru.css */
+:root {
+  --primary-color: #3b82f6;
+  --primary-dark: #2563eb;
+  --secondary-color: #8b5cf6;
+  --success-color: #10b981;
+  --danger-color: #ef4444;
+  --warning-color: #f59e0b;
+  
+  --bg-color: #f8fafc;
+  --card-bg: #ffffff;
+  --text-color: #1e293b;
+  --text-muted: #64748b;
+  --border-color: #e2e8f0;
+  
+  --sidebar-width: 260px;
+  
+  --border-radius: 12px;
+  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  
+  --transition: all 0.3s cubic-bezier(0.2, 0.9, 0.2, 1);
+}
+
+.tambah-guru-app {
+  display: flex;
+  min-height: 100vh;
+  background-color: var(--bg-color);
+}
+
+.tambah-guru-main {
+  box-sizing: border-box;
+  padding: 28px;
+  height: 100vh;
+  width: calc(100vw - var(--sidebar-width));
+  margin-left: var(--sidebar-width);
+  overflow-y: auto;
+  background-color: var(--bg-color);
+}
+
+/* Header */
+.tambah-guru-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--card-bg);
+  padding: 20px 24px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  margin-bottom: 24px;
+  border: 1px solid var(--border-color);
+}
+
+.tambah-guru-header-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.tambah-guru-back-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: transparent;
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 14px;
+  transition: var(--transition);
+}
+
+.tambah-guru-back-btn:hover {
+  background: var(--primary-color);
+  color: white;
+}
+
+.tambah-guru-title-section h1 {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text-color);
+  margin: 0;
+}
+
+.tambah-guru-subtitle {
+  font-size: 14px;
+  color: var(--text-muted);
+  font-weight: 500;
+  margin-top: 4px;
+}
+
+.tambah-guru-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Content */
+.tambah-guru-content {
+  background: var(--card-bg);
+  padding: 30px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border-color);
+}
+
+.tambah-guru-section {
+  margin-bottom: 32px;
+}
+
+.tambah-guru-section:last-child {
+  margin-bottom: 0;
+}
+
+.tambah-guru-section h2 {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--primary-color);
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--border-color);
+}
+
+.tambah-guru-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.tambah-guru-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.tambah-guru-field label {
+  font-weight: 600;
+  color: var(--text-muted);
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.tambah-guru-field input,
+.tambah-guru-field select,
+.tambah-guru-field textarea {
+  padding: 12px 16px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  font-size: 16px;
+  transition: var(--transition);
+  background: var(--card-bg);
+  color: var(--text-color);
+  font-family: inherit;
+}
+
+.tambah-guru-field input:focus,
+.tambah-guru-field select:focus,
+.tambah-guru-field textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.tambah-guru-field input.readonly {
+  background-color: #f8fafc;
+  color: var(--text-muted);
+  cursor: not-allowed;
+}
+
+.tambah-guru-field textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* Checkbox Grid untuk Mata Pelajaran */
+.tambah-guru-mapel-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+}
+
+.tambah-guru-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: var(--transition);
+  background: var(--card-bg);
+  font-weight: 500;
+  color: var(--text-color);
+}
+
+.tambah-guru-checkbox:hover {
+  border-color: var(--primary-color);
+  background: rgba(59, 130, 246, 0.05);
+}
+
+.tambah-guru-checkbox input[type="checkbox"] {
+  display: none;
+}
+
+.tambah-guru-checkbox .checkmark {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--border-color);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+}
+
+.tambah-guru-checkbox input[type="checkbox"]:checked + .checkmark {
+  background: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.tambah-guru-checkbox input[type="checkbox"]:checked + .checkmark::after {
+  content: '✓';
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+/* Message Styling */
+.tambah-guru-message {
+  padding: 12px 16px;
+  background: rgba(239, 68, 68, 0.1);
+  color: var(--danger-color);
+  border-radius: var(--border-radius);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  margin-bottom: 20px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Actions */
+.tambah-guru-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  margin-top: 32px;
+  padding-top: 20px;
+  border-top: 2px solid var(--border-color);
+}
+
+/* Buttons */
+.btn-primary {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: white;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  transition: var(--transition);
+  box-shadow: var(--shadow);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.btn-ghost {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  background: transparent;
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 14px;
+  transition: var(--transition);
+}
+
+.btn-ghost:hover {
+  background: var(--primary-color);
+  color: white;
+}
+
+/* Alert Modal Styles */
+.tg-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(4px);
+  animation: tg-fadeIn 0.3s ease;
+}
+
+.tg-modal-container {
+  background: var(--card-bg);
+  border-radius: 16px;
+  padding: 32px;
+  max-width: 480px;
+  width: 90%;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--border-color);
+  animation: tg-slideUp 0.3s ease;
+  text-align: center;
+  position: relative;
+}
+
+.tg-modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: none;
+  border: none;
+  font-size: 18px;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  transition: var(--transition);
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tg-modal-close:hover {
+  background: rgba(0, 0, 0, 0.1);
+  color: var(--text-color);
+}
+
+.tg-modal-icon {
+  font-size: 64px;
+  margin-bottom: 20px;
+}
+
+.tg-success-icon {
+  color: var(--success-color);
+}
+
+.tg-error-icon {
+  color: var(--danger-color);
+}
+
+.tg-warning-icon {
+  color: var(--warning-color);
+}
+
+.tg-modal-content h3 {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text-color);
+  margin: 0 0 12px 0;
+}
+
+.tg-modal-content p {
+  color: var(--text-muted);
+  font-size: 16px;
+  line-height: 1.5;
+  margin: 0 0 8px 0;
+}
+
+.tg-modal-warning {
+  color: var(--warning-color) !important;
+  font-weight: 500;
+  font-size: 14px !important;
+  margin-top: 12px !important;
+}
+
+.tg-modal-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 24px;
+}
+
+.tg-btn-modal-primary {
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: var(--border-radius);
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: var(--transition);
+  min-width: 100px;
+}
+
+.tg-btn-modal-primary:hover {
+  background: var(--primary-dark);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow);
+}
+
+.tg-success-btn {
+  background: var(--success-color);
+}
+
+.tg-success-btn:hover {
+  background: #059669;
+}
+
+.tg-error-btn {
+  background: var(--danger-color);
+}
+
+.tg-error-btn:hover {
+  background: #dc2626;
+}
+
+.tg-btn-modal-secondary {
+  background: var(--card-bg);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+  padding: 12px 24px;
+  border-radius: var(--border-radius);
+  font-weight: 500;
+  font-size: 14px;
+  cursor: pointer;
+  transition: var(--transition);
+  min-width: 100px;
+}
+
+.tg-btn-modal-secondary:hover {
+  background: #f8fafc;
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+  transform: translateY(-1px);
+}
+
+.tg-btn-modal-danger {
+  background: var(--danger-color);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: var(--border-radius);
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: var(--transition);
+  min-width: 100px;
+}
+
+.tg-btn-modal-danger:hover {
+  background: #dc2626;
+  transform: translateY(-1px);
+  box-shadow: var(--shadow);
+}
+
+/* Animations */
+@keyframes tg-fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes tg-slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Modal */
+@media (max-width: 480px) {
+  .tg-modal-container {
+    padding: 24px;
+    margin: 16px;
+  }
+  
+  .tg-modal-icon {
+    font-size: 48px;
+  }
+  
+  .tg-modal-content h3 {
+    font-size: 20px;
+  }
+  
+  .tg-modal-content p {
+    font-size: 14px;
+  }
+  
+  .tg-modal-actions {
+    flex-direction: column;
+  }
+  
+  .tg-btn-modal-primary,
+  .tg-btn-modal-secondary,
+  .tg-btn-modal-danger {
+    width: 100%;
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .tambah-guru-main {
+    padding: 16px;
+    margin-left: 0;
+    width: 100vw;
+  }
+  
+  .tambah-guru-header {
+    flex-direction: column;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  
+  .tambah-guru-header-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  .tambah-guru-content {
+    padding: 20px;
+  }
+  
+  .tambah-guru-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .tambah-guru-mapel-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .tambah-guru-actions {
+    flex-direction: column;
+  }
+  
+  .btn-primary,
+  .btn-ghost {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .tambah-guru-main {
+    padding: 12px;
+  }
+  
+  .tambah-guru-header {
+    padding: 16px;
+  }
+  
+  .tambah-guru-content {
+    padding: 16px;
+  }
+}

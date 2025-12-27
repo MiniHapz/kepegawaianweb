@@ -1,88 +1,63 @@
-import { useState } from "react"
-import { useNavigate } from "react-router-dom"
-import { FaGraduationCap } from "react-icons/fa"
-import "./login.css"
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { FaGraduationCap } from "react-icons/fa";
+import "./login.css";
+import api from "../../../services/api";
 
 export default function LoginPage() {
-  const navigate = useNavigate()
-  const [showPassword, setShowPassword] = useState(false)
-  const [username, setUsername] = useState("")
-  const [password, setPassword] = useState("")
-  const [error, setError] = useState("")
-  const [loading, setLoading] = useState(false)
+  const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
+  const [username, setUsername] = useState(""); // ganti dari email ke username
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  // Kredensial mock untuk dua role
-  const validUsers = [
-    { 
-      username: "admin", 
-      password: "admin123", 
-      role: "admin_cabdin",
-      name: "Admin Cabdin",
-      school: "Cabang Dinas Pendidikan Wilayah VII"
-    },
-    { 
-      username: "operator", 
-      password: "op2025", 
-      role: "operator_sekolah",
-      name: "Operator Sekolah", 
-      school: "SMK N 2 Sukoharjo"
-    }
-  ]
+  const handleSubmit = async (e) => {
+  e.preventDefault();
+  setError("");
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    setError("")
-
-    if (!username || !password) {
-      setError("Username dan Password wajib diisi.")
-      return
-    }
-
-    setLoading(true)
-
-    // Simulasi proses login
-    setTimeout(() => {
-      const foundUser = validUsers.find(
-        (user) => user.username === username.trim() && user.password === password
-      )
-
-      if (!foundUser) {
-        setError("Username atau password salah.")
-        setLoading(false)
-        return
-      }
-
-      // Simpan session user
-      try {
-        const userSession = {
-          username: foundUser.username,
-          role: foundUser.role,
-          name: foundUser.name,
-          school: foundUser.school,
-          loginTime: new Date().toISOString()
-        }
-        localStorage.setItem("sessionUser", JSON.stringify(userSession))
-        console.log("User logged in:", userSession)
-      } catch (err) {
-        console.error("Error saving session:", err)
-        setError("Gagal menyimpan session.")
-        setLoading(false)
-        return
-      }
-
-      setLoading(false)
-
-      // Redirect berdasarkan role
-      if (foundUser.role === "admin_cabdin") {
-        navigate("/admin-cabdin/dashboard", { replace: true })
-      } else if (foundUser.role === "operator_sekolah") {
-        navigate("/dashboard", { replace: true })
-      } else {
-        // Fallback
-        navigate("/dashboard", { replace: true })
-      }
-    }, 800)
+  if (!username || !password) {
+    setError("Username dan Password wajib diisi.");
+    return;
   }
+
+  setLoading(true);
+
+  try {
+    const res = await api.post("/login", { username, password });
+
+    const data = res.data;
+
+    const sessionUser = {
+      id: data.user.id,
+      name: data.user.name,
+      username: data.user.username,
+      role:
+        data.user.role === "admin"
+          ? "admin_cabdin"
+          : "operator_sekolah",
+      sekolah: data.user.sekolah,
+      token: data.access_token,
+      loginTime: new Date().toISOString(),
+    };
+
+    localStorage.setItem("sessionUser", JSON.stringify(sessionUser));
+    localStorage.setItem("token", data.access_token);
+
+    if (sessionUser.role === "admin_cabdin") {
+      navigate("/admin-cabdin/dashboard", { replace: true });
+    } else {
+      navigate("/operator/dashboard", { replace: true });
+    }
+  } catch (err) {
+    setError(
+      err.response?.data?.message || "Username atau password salah."
+    );
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   return (
     <div className="login-page">
@@ -104,7 +79,11 @@ export default function LoginPage() {
             Surakarta
           </p>
 
-          {error && <div className="login-error" role="alert">{error}</div>}
+          {error && (
+            <div className="login-error" role="alert">
+              {error}
+            </div>
+          )}
 
           <form onSubmit={handleSubmit}>
             <div className="form-group">
@@ -112,7 +91,7 @@ export default function LoginPage() {
               <input
                 id="username"
                 type="text"
-                placeholder="Masukan Username"
+                placeholder="Masukkan Username"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 autoComplete="username"
@@ -126,7 +105,7 @@ export default function LoginPage() {
                 <input
                   id="password"
                   type={showPassword ? "text" : "password"}
-                  placeholder="Masukan Password"
+                  placeholder="Masukkan Password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   autoComplete="current-password"
@@ -136,25 +115,23 @@ export default function LoginPage() {
                   type="button"
                   className="toggle-password"
                   onClick={() => setShowPassword((s) => !s)}
-                  aria-label={showPassword ? "Sembunyikan password" : "Tampilkan password"}
+                  aria-label={
+                    showPassword ? "Sembunyikan password" : "Tampilkan password"
+                  }
                   disabled={loading}
                 >
-                  {showPassword ? "🙈" : "👁️"}
+                  {showPassword ? "🤐" : "👁️"}
                 </button>
               </div>
             </div>
 
             <div className="form-options">
               <label className="remember">
-                <input type="checkbox" disabled={loading} /> Ingatkan saya
+                <input type="checkbox" disabled={loading} /> Ingat saya
               </label>
             </div>
 
-            <button 
-              type="submit" 
-              className="btn-login" 
-              disabled={loading}
-            >
+            <button type="submit" className="btn-login" disabled={loading}>
               {loading ? (
                 <>
                   <span className="loading-spinner"></span>
@@ -165,15 +142,8 @@ export default function LoginPage() {
               )}
             </button>
           </form>
-
-          {/* Info login untuk testing */}
-          {/* <div className="login-hint">
-            <p><strong>Testing Credentials:</strong></p>
-            <p>Admin: username: <code>admin</code>, password: <code>admin123</code></p>
-            <p>Operator: username: <code>operator</code>, password: <code>op2025</code></p>
-          </div> */}
         </div>
       </div>
     </div>
-  )
+  );
 }

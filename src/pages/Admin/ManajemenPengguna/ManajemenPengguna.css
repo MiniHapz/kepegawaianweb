@@ -1,0 +1,659 @@
+/* ManajemenPengguna.css - Konsisten dengan DataGuru.css */
+
+/* Filter Section */
+.acd-filter-section {
+  background: var(--acd-card-bg);
+  padding: 24px 32px;
+  border-radius: var(--acd-border-radius);
+  box-shadow: var(--acd-shadow);
+  border: 1px solid var(--acd-border-color);
+  margin-bottom: 28px;
+}
+
+.acd-filter-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--acd-border-color);
+}
+
+.acd-filter-icon {
+  color: var(--acd-primary-color);
+  font-size: 18px;
+}
+
+.acd-filter-header h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--acd-text-color);
+  margin: 0;
+}
+
+.acd-filter-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.acd-filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.acd-filter-actions {
+  display: flex;
+  align-items: flex-end;
+}
+
+.acd-filter-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--acd-text-color);
+}
+
+.acd-filter-select {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid var(--acd-border-color);
+  border-radius: 8px;
+  font-size: 14px;
+  transition: var(--acd-transition);
+  background: white;
+  color: var(--acd-text-color);
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+  background-position: right 12px center;
+  background-repeat: no-repeat;
+  background-size: 16px;
+}
+
+.acd-filter-select:focus {
+  outline: none;
+  border-color: var(--acd-primary-light);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.acd-search-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.acd-search-icon {
+  position: absolute;
+  left: 12px;
+  color: var(--acd-text-muted);
+  font-size: 14px;
+}
+
+.acd-search-input {
+  width: 100%;
+  padding: 12px 16px 12px 40px;
+  border: 1px solid var(--acd-border-color);
+  border-radius: 8px;
+  font-size: 14px;
+  transition: var(--acd-transition);
+  background: white;
+  color: var(--acd-text-color);
+}
+
+.acd-search-input:focus {
+  outline: none;
+  border-color: var(--acd-primary-light);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Tombol Tambah Operator - Diperbarui untuk ukuran yang lebih proporsional */
+.acd-primary-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px 16px;
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  overflow: hidden;
+  width: 100%;
+  height: 44px;
+  letter-spacing: 0.3px;
+}
+
+.acd-add-operator-btn {
+  background: rgb(95, 149, 255);
+  color: white;
+  box-shadow: 
+    0 2px 8px rgba(67, 97, 238, 0.25),
+    0 4px 12px rgba(124, 58, 237, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.acd-add-operator-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 4px 12px rgba(67, 97, 238, 0.35),
+    0 8px 20px rgba(124, 58, 237, 0.25);
+  background: linear-gradient(135deg, 
+    var(--acd-primary-light) 0%, 
+    var(--acd-primary-color) 50%, 
+    var(--acd-secondary-color) 100%);
+}
+
+.acd-add-operator-btn:active {
+  transform: translateY(0);
+  box-shadow: 
+    0 2px 6px rgba(67, 97, 238, 0.3);
+}
+
+.acd-add-icon {
+  font-size: 14px;
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.2));
+  transition: transform 0.3s ease;
+}
+
+.acd-add-operator-btn:hover .acd-add-icon {
+  transform: scale(1.05);
+}
+
+.acd-btn-text {
+  font-weight: 600;
+}
+
+/* Shine Effect */
+.acd-btn-shine {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  transition: left 0.8s ease;
+  transform: skewX(-20deg);
+}
+
+.acd-add-operator-btn:hover .acd-btn-shine {
+  left: 150%;
+}
+
+/* Pulse Animation */
+@keyframes buttonPulse {
+  0% {
+    box-shadow: 
+      0 8px 25px rgba(67, 97, 238, 0.4),
+      0 15px 40px rgba(124, 58, 237, 0.3);
+  }
+  50% {
+    box-shadow: 
+      0 8px 25px rgba(67, 97, 238, 0.6),
+      0 15px 40px rgba(124, 58, 237, 0.5);
+  }
+  100% {
+    box-shadow: 
+      0 8px 25px rgba(67, 97, 238, 0.4),
+      0 15px 40px rgba(124, 58, 237, 0.3);
+  }
+}
+
+/* Table Section */
+.acd-table-section {
+  background: var(--acd-card-bg);
+  border-radius: var(--acd-border-radius);
+  box-shadow: var(--acd-shadow);
+  border: 1px solid var(--acd-border-color);
+  overflow: hidden;
+}
+
+.acd-table-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 32px;
+  border-bottom: 1px solid var(--acd-border-color);
+  background: #f8fafc;
+}
+
+.acd-table-header h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--acd-text-color);
+  margin: 0;
+}
+
+.acd-table-count {
+  font-size: 14px;
+  color: var(--acd-text-muted);
+  font-weight: 500;
+}
+
+.acd-table-container {
+  overflow-x: auto;
+  border-radius: var(--acd-border-radius);
+  box-shadow: var(--acd-shadow);
+  margin-bottom: 24px;
+  border: 1px solid var(--acd-border-color);
+}
+
+.acd-performance-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--acd-card-bg);
+  min-width: 1000px;
+}
+
+/* Header Tabel */
+.acd-performance-table thead {
+  background: linear-gradient(135deg, var(--acd-primary-color), var(--acd-secondary-color));
+}
+
+.acd-performance-table th {
+  padding: 16px 20px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 14px;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 2px solid var(--acd-border-color);
+}
+
+.acd-performance-table td {
+  padding: 16px 20px;
+  font-size: 14px;
+  vertical-align: middle;
+}
+
+/* Text Alignment untuk Kolom Tertentu */
+.acd-table-number,
+.acd-table-login {
+  text-align: center;
+}
+
+.acd-text-center {
+  text-align: center;
+}
+
+/* Baris tabel */
+.acd-performance-table tbody tr:nth-child(even) {
+  background-color: rgba(243, 244, 246, 0.5);
+}
+
+.acd-performance-table tbody tr {
+  transition: var(--acd-transition);
+  border-bottom: 1px solid var(--acd-border-color);
+}
+
+.acd-performance-table tbody tr:hover {
+  background-color: rgba(59, 130, 246, 0.05);
+}
+
+.acd-performance-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+/* Table Cells */
+.acd-pengguna-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-align: left;
+}
+
+.acd-pengguna-nama {
+  font-weight: 600;
+  color: var(--acd-text-color);
+  font-size: 14px;
+}
+
+.acd-table-username {
+  font-weight: 600;
+  color: var(--acd-primary-color);
+}
+
+/* Badges */
+.acd-sekolah-badge {
+  display: inline-block;
+  padding: 6px 12px;
+  background: rgba(59, 130, 246, 0.1);
+  color: var(--acd-primary-color);
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* Status Badges */
+.acd-status-badge {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.acd-status-aktif {
+  background: rgba(34, 197, 94, 0.1);
+  color: var(--acd-success-color);
+}
+
+.acd-status-nonaktif {
+  background: rgba(239, 68, 68, 0.1);
+  color: var(--acd-danger-color);
+}
+
+/* Actions Cell - Diperbarui untuk background full */
+.acd-actions-cell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2px;
+}
+
+.acd-action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--acd-transition);
+  white-space: nowrap;
+  min-width: 100px;
+  height: 36px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Pastikan background full cover seluruh tombol */
+.acd-edit-btn {
+  background: rgba(87, 237, 254, 0.388);
+  color: rgb(77, 146, 248);
+}
+
+.acd-edit-btn:hover {
+  background: rgba(129, 224, 255, 0.956);
+  border-color: var(--acd-primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.acd-nonaktif-btn {
+  background: rgba(236, 160, 160, 0.415);
+  color: rgb(206, 0, 0);
+}
+
+.acd-nonaktif-btn:hover {
+  background: #ff7777;
+  border-color: #dc2626;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
+.acd-aktif-btn {
+  background: rgba(105, 171, 8, 0.2);
+  color: rgb(13, 116, 16);
+}
+
+.acd-aktif-btn:hover {
+  background: #8dffdb;
+  border-color: #059669;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+/* Ikon tombol */
+.acd-btn-icon {
+  font-size: 11px;
+  flex-shrink: 0;
+}
+
+.acd-btn-text {
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+/* Efek overlay untuk tombol */
+.acd-action-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: var(--acd-transition);
+}
+
+.acd-action-btn:hover::before {
+  left: 100%;
+}
+
+/* Empty State */
+.acd-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.acd-empty-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+  opacity: 0.5;
+}
+
+.acd-empty-state h4 {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--acd-text-color);
+  margin: 0 0 8px 0;
+}
+
+.acd-empty-state p {
+  font-size: 14px;
+  color: var(--acd-text-muted);
+  margin: 0;
+}
+
+/* Pagination */
+.acd-pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 32px;
+  border-top: 1px solid var(--acd-border-color);
+  background: #f8fafc;
+}
+
+.acd-pagination-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: white;
+  color: var(--acd-text-color);
+  border: 1px solid var(--acd-border-color);
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--acd-transition);
+}
+
+.acd-pagination-btn:hover:not(:disabled) {
+  background: var(--acd-primary-color);
+  color: white;
+  border-color: var(--acd-primary-color);
+}
+
+.acd-pagination-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.acd-pagination-numbers {
+  display: flex;
+  gap: 8px;
+}
+
+.acd-pagination-number {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--acd-border-color);
+  border-radius: 6px;
+  background: white;
+  color: var(--acd-text-color);
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  transition: var(--acd-transition);
+}
+
+.acd-pagination-number:hover {
+  border-color: var(--acd-primary-color);
+  color: var(--acd-primary-color);
+}
+
+.acd-pagination-active {
+  background: var(--acd-primary-color);
+  color: white;
+  border-color: var(--acd-primary-color);
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .acd-filter-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 1024px) {
+  .acd-filter-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .acd-actions-cell {
+    flex-direction: column;
+    gap: 6px;
+  }
+  
+  .acd-action-btn {
+    width: 100%;
+    min-width: 120px;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .acd-filter-section {
+    padding: 20px 24px;
+  }
+  
+  .acd-filter-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  
+  .acd-table-header {
+    padding: 16px 20px;
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+  }
+  
+  .acd-performance-table th,
+  .acd-performance-table td {
+    padding: 12px 16px;
+  }
+  
+  .acd-pagination {
+    flex-direction: column;
+    gap: 16px;
+    padding: 16px 20px;
+  }
+  
+  .acd-pagination-numbers {
+    order: -1;
+  }
+}
+
+@media (max-width: 640px) {
+  .acd-filter-section {
+    padding: 16px 20px;
+  }
+  
+  .acd-pengguna-info {
+    min-width: 150px;
+  }
+  
+  .acd-action-btn {
+    padding: 8px 12px;
+    font-size: 11px;
+    min-width: 90px;
+    height: 32px;
+  }
+  
+  .acd-btn-text {
+    font-size: 11px;
+  }
+}
+
+/* Animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.acd-performance-table tbody tr {
+  animation: fadeInUp 0.5s ease-out;
+}
+
+.acd-performance-table tbody tr:nth-child(1) { animation-delay: 0.1s; }
+.acd-performance-table tbody tr:nth-child(2) { animation-delay: 0.2s; }
+.acd-performance-table tbody tr:nth-child(3) { animation-delay: 0.3s; }
+
+/* Scrollbar Styling */
+.acd-table-container::-webkit-scrollbar {
+  height: 8px;
+}
+
+.acd-table-container::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 4px;
+}
+
+.acd-table-container::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+.acd-table-container::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}

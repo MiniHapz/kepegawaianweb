@@ -170,13 +170,18 @@
   gap:10px;
   align-items:center;
   justify-content:center;
-  background:rgb(63, 36, 36);
+  background:linear-gradient(135deg, #b91c1c, #dc2626);
   color:rgb(255, 255, 255);
   border:none;
   padding:10px;
   border-radius:8px;
   cursor:pointer;
   font-weight:600;
+}
+.logout-btn:hover {
+  background: rgb(63, 36, 36);
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.4);
+  transform: translateY(-2px);
 }
 .sidebar.collapsed .logout-label { 
   display:none; 
@@ -185,4 +190,196 @@
 /* responsive: slide-in for very small screens (optional JS control) */
 @media (max-width:900px) {
   .sidebar { transform: translateX(0); position: fixed; left:0; top:0; }
+}
+
+/* Logout Confirmation Modal Styles for Sidebar Operator */
+.so-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  backdrop-filter: blur(4px);
+  animation: so-fadeIn 0.3s ease;
+}
+
+.so-modal-container {
+  background: white;
+  border-radius: 16px;
+  padding: 32px;
+  max-width: 440px;
+  width: 90%;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  animation: so-slideUp 0.3s ease;
+  text-align: center;
+  position: relative;
+}
+
+.so-modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: rgba(0, 0, 0, 0.1);
+  border: none;
+  font-size: 16px;
+  color: #64748b;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.so-modal-close:hover {
+  background: rgba(0, 0, 0, 0.2);
+  color: #374151;
+}
+
+.so-modal-icon {
+  font-size: 64px;
+  margin-bottom: 20px;
+}
+
+.so-warning-icon {
+  color: #f59e0b;
+}
+
+.so-modal-content h3 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0 0 12px 0;
+}
+
+.so-modal-content p {
+  color: #64748b;
+  font-size: 16px;
+  line-height: 1.5;
+  margin: 0 0 8px 0;
+}
+
+.so-modal-warning {
+  color: #f59e0b !important;
+  font-weight: 500;
+  font-size: 14px !important;
+  margin-top: 12px !important;
+  background: rgba(245, 158, 11, 0.1);
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid rgba(245, 158, 11, 0.2);
+}
+
+.so-modal-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 24px;
+}
+
+.so-btn-modal-secondary {
+  background: rgba(235, 235, 235, 0.771);
+  color: #64748b;
+  border: 1px solid #e2e8f0;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 100px;
+}
+
+.so-btn-modal-secondary:hover {
+  background: rgba(200, 200, 200, 0.771);
+  border-color: #cbd5e1;
+  transform: translateY(-1px);
+}
+
+.so-btn-modal-danger {
+  background: linear-gradient(135deg, #dc2626, #b91c1c);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 100px;
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+}
+
+.so-btn-modal-danger:hover {
+  background: linear-gradient(135deg, #b91c1c, #991b1b);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(220, 38, 38, 0.4);
+}
+
+/* Animations */
+@keyframes so-fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes so-slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Modal */
+@media (max-width: 480px) {
+  .so-modal-container {
+    padding: 24px;
+    margin: 16px;
+  }
+  
+  .so-modal-icon {
+    font-size: 48px;
+  }
+  
+  .so-modal-content h3 {
+    font-size: 20px;
+  }
+  
+  .so-modal-content p {
+    font-size: 14px;
+  }
+  
+  .so-modal-actions {
+    flex-direction: column;
+  }
+  
+  .so-btn-modal-secondary,
+  .so-btn-modal-danger {
+    width: 100%;
+  }
+}
+
+/* Ensure modal appears above sidebar */
+.sidebar {
+  z-index: 9999;
+}
+
+.so-modal-overlay {
+  z-index: 10000;
 }

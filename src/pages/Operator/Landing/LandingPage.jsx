@@ -19,7 +19,7 @@ export default function LandingPage() {
       <div className="landing-options">
         <div
           className="option option--ketenagaan"
-          onClick={() => navigate('/ketenagaan')}
+          onClick={() => window.location.href = 'https://testweb2025.host.adellya.my.id/cabdin_pendidikan/index.php'}
         >
           <FaUsers className="option-icon" />
           <div className="option-label">Ketenagaan</div>

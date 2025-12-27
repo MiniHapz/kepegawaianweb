@@ -416,6 +416,18 @@ body {
   color: var(--success-color);
   border: 1px solid rgba(16, 185, 129, 0.2);
 }
+.status-p3k {
+  background: rgba(59, 130, 246, 0.1); /* Biru lembut */
+  color: var(--primary-color); /* Warna biru utama */
+  border: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+.status-p3k_paruh_waktu {
+  background: rgba(255, 152, 0, 0.15); /* oranye lembut */
+  color: #e65100; /* oranye tua */
+  border: 1px solid rgba(255, 152, 0, 0.3);
+}
+
 
 /* Action Buttons - COMPLETELY FIXED */
 .actions-cell {
@@ -935,3 +947,4 @@ body {
 .retirement-table-wrap::-webkit-scrollbar-thumb:hover {
   background: #94a3b8;
 }
+
