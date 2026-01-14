@@ -61,10 +61,23 @@ useEffect(() => {
         setDataPengguna(formattedUsers);
 
         // sekolah option
-        const sekolahList = sekolahRes.data.data.map(
-          (s) => s.nama_sekolah
-        );
-        setSekolahOptions(["Semua Sekolah", ...sekolahList]);
+        // ambil sekolah dari tabel sekolah
+const sekolahDariMaster = sekolahRes.data.data.map(
+  (s) => s.nama_sekolah
+);
+
+// ambil sekolah dari user (yang sudah punya operator)
+const sekolahDariUser = formattedUsers
+  .map((u) => u.sekolah)
+  .filter((s) => s && s !== "-");
+
+// gabungkan + hilangkan duplikat
+const semuaSekolah = Array.from(
+  new Set([...sekolahDariMaster, ...sekolahDariUser])
+);
+
+setSekolahOptions(["Semua Sekolah", ...semuaSekolah]);
+
       } catch (error) {
         console.error("Gagal memuat data pengguna:", error);
       }

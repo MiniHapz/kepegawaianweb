@@ -42,6 +42,8 @@ export default function DashboardAdminCabdin() {
         
         const res = await api.get('/dashboard-admin');
 
+        console.log('JUMLAH SEKOLAH DARI API:', res.data.daftar_sekolah.length);
+console.log('ISI SEKOLAH:', res.data.daftar_sekolah);
         console.log("FULL RESPONSE:", res.data);
     console.log("DETAIL STATS:", res.data.stats.detail);
         setDashboard(res.data);
@@ -181,7 +183,11 @@ export default function DashboardAdminCabdin() {
     sekolah.alamat.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  const totalPages = Math.ceil(filteredSekolah.length / itemsPerPage);
+  const totalPages = Math.max(
+  1,
+  Math.ceil(filteredSekolah.length / itemsPerPage)
+);
+
 
   const paginatedSekolah = filteredSekolah.slice(startIndex, startIndex + itemsPerPage);
   const guruData = dashboard.guru_pie || [];
